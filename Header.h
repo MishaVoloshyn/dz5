@@ -3,7 +3,7 @@ namespace global {
     extern int index;
 }
 
-class PhoneBook {
+class PhoneList {
 private:
     char* firstName;
     char* middleName;
@@ -12,15 +12,15 @@ private:
     char* mobilePhone;
 
 public:
-    PhoneBook();
+    PhoneList();
     void AskInformation();
-    void Add(PhoneBook* user, int amount);
+    void Add(PhoneList* user, int amount);
     bool CheckPhone(char* checkPhone);
-    void AddToFile(const char* filename, PhoneBook* user);
-    void ShowPersonalData(const char* filename, PhoneBook* user);
-    PhoneBook* DeletePerson(PhoneBook* user);
-    void GetUser(PhoneBook* user, int i);
-    void FindFullName(PhoneBook* user);
-    ~PhoneBook();
+    void AddToFile(const char* filename, PhoneList* user);
+    void ShowPersonalData(const char* filename, PhoneList* user);
+    PhoneList* DeletePerson(PhoneList* user);
+    void GetUser(PhoneList* user, int i);
+    void FindFullName(PhoneList* user);
+    ~PhoneList();
 
 };

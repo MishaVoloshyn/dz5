@@ -12,7 +12,7 @@ const int MAX = 20;
 
 errno_t code;
 
-PhoneBook::PhoneBook() {
+PhoneList::PhoneList() {
     firstName = nullptr;
     middleName = nullptr;
     lastName = nullptr;
@@ -21,8 +21,8 @@ PhoneBook::PhoneBook() {
     mobilePhone = nullptr;
 }
 
-//function to check phone
-bool PhoneBook::CheckPhone(char* checkPhone) {
+
+bool PhoneList::CheckPhone(char* checkPhone) {
     int size = 0;
     while (checkPhone[size] != '\0')
     {
@@ -43,10 +43,10 @@ bool PhoneBook::CheckPhone(char* checkPhone) {
 
 }
 
-//function to ask information about user
-void PhoneBook::AskInformation() {
+
+void PhoneList::AskInformation() {
     if (global::index < MAX) {
-        //full name 
+        
 
         char buffFirstName[20], buffMiddleName[20], buffLastName[20];
         cout << "Name: ";
@@ -89,33 +89,33 @@ void PhoneBook::AskInformation() {
     }
 }
 
-void PhoneBook::Add(PhoneBook* user, int amount) {
+void PhoneList::Add(PhoneList* user, int amount) {
     for (int i = 0; i < amount; i++) {
         user[i].AskInformation();
     }
 }
 
-void PhoneBook::AddToFile(const char* filename, PhoneBook* user) {
+void PhoneList::AddToFile(const char* filename, PhoneList* user) {
     FILE* users;
     users = fopen(filename, "w");
     if (users == 0)
     {
-        cout << "Error opening file\n";
+        cout << "Error open\n";
     }
     else
     {
         for (int i = 0; i < global::index; i++) {
             fprintf(users, "FIO: %s %s %s \n", user[i].firstName, user[i].middleName, user[i].lastName);
-            fprintf(users, "Work phone number: %s \n", user[i].workPhone);
-            fprintf(users, "Mobile phone number: %s \n\n", user[i].mobilePhone);
+            fprintf(users, "Work  number: %s \n", user[i].workPhone);
+            fprintf(users, "Mobile  number: %s \n\n", user[i].mobilePhone);
         }
-        cout << "Data saved! " << endl;
+        cout << "Saved! " << endl;
         fclose(users);
-        printf("User data loaded to file successfully!\n");
+        printf("Person data loaded to file good\n");
     }
 }
 
-PhoneBook* PhoneBook::DeletePerson(PhoneBook* user) {
+PhoneList* PhoneList::DeletePerson(PhoneList* user) {
     char buffMiddleName[20];
     int userIndex = -1;
     cout << "Enter user`s middleName: ";
@@ -130,35 +130,35 @@ PhoneBook* PhoneBook::DeletePerson(PhoneBook* user) {
         }
     }
     int new_size = 5;
-    PhoneBook* new_users = new PhoneBook[new_size];
+    PhoneList* new_users = new PhoneList[new_size];
     int j = 0;
     for (int i = 0; i < global::index - 1; i++) {
         if (userIndex != -1) {
-            //name
+            
             new_users[j].firstName = new char[strlen(user[i].firstName) + 1];
             strcpy(new_users[j].firstName, user[i].firstName);
-            //middle name
+           
             new_users[j].middleName = new char[strlen(user[i].middleName) + 1];
             strcpy(new_users[j].middleName, user[i].middleName);
-            //last name
+           
             new_users[j].lastName = new char[strlen(user[i].lastName) + 1];
             strcpy(new_users[j].lastName, user[i].lastName);
 
-            //work phone
+           
             new_users[j].workPhone = new char[strlen(user[i].workPhone) + 1];
             strcpy(new_users[j].workPhone, user[i].workPhone);
-            //mobile phone
+           
             new_users[j].mobilePhone = new char[strlen(user[i].mobilePhone) + 1];
             strcpy(new_users[j].mobilePhone, user[i].mobilePhone);
             j++;
         }
     }
     delete[] user;
-    cout << "Data deleted successfully" << endl;
+    cout << "Data deleted good" << endl;
     return new_users;
 }
 
-void PhoneBook::ShowPersonalData(const char* filename, PhoneBook* user) {
+void PhoneList::ShowPersonalData(const char* filename, PhoneList* user) {
     FILE* users;
     code = fopen_s(&users, filename, "r");
     if (!code)
@@ -168,21 +168,21 @@ void PhoneBook::ShowPersonalData(const char* filename, PhoneBook* user) {
             cout << buff;
     }
     else {
-        cout << "Something went wrong :(" << endl;
+        cout << "Something wrong :(" << endl;
     }
     fclose(users);
 }
 
-void PhoneBook::GetUser(PhoneBook* user, int i) {
+void PhoneList::GetUser(PhoneList* user, int i) {
     cout << "FIO: " << user[i].firstName << "\t" << user[i].middleName << "\t" << user[i].lastName << endl;
     cout << "Work number: " << user[i].workPhone << endl;
     cout << "Mobile number: " << user[i].mobilePhone << endl;
 }
 
-void PhoneBook::FindFullName(PhoneBook* user) {
+void PhoneList::FindFullName(PhoneList* user) {
     if (global::index == 0)
     {
-        cout << "List is empty!" << endl;
+        cout << "List full!" << endl;
     }
     else {
         char buffName[20], buffMiddle[20], buffLast[20];
@@ -210,7 +210,7 @@ void PhoneBook::FindFullName(PhoneBook* user) {
 
 }
 
-PhoneBook::~PhoneBook() {
+PhoneList::~PhoneList() {
     delete[] firstName;
     delete[] middleName;
     delete[] lastName;

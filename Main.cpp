@@ -12,14 +12,13 @@ void ShowMenu() {
     cout << "2 - Show" << endl;
     cout << "3 - Delete " << endl;
     cout << "4 - Find  full name" << endl;
-    cout << "5 - Exit" << endl;
 }
 
 int main() {
 
     int size_user = 20;
     setlocale(LC_ALL, "");
-    PhoneBook* user = new PhoneBook[size_user];
+    PhoneList* user = new PhoneList[size_user];
     const char* filename = "users.txt";
     bool repeat = false;
     int userAction;
@@ -45,11 +44,8 @@ int main() {
         case 4:
             user->FindFullName(user);
             break;
-        case 5:
-            cout << "Exiting the program..." << endl;
-            break;
         default:
-            cout << "Incorrect choice, try again" << endl;
+            cout << "Incorrect choice, again" << endl;
             cout << endl;
             break;
         }
@@ -57,13 +53,13 @@ int main() {
             break;
         }
         else {
-            cout << "Continue?\n[1] - yes\t[0] - no" << endl;
+            cout << "Continue?\n1 - yes\t0 - no" << endl;
             cout << endl;
-            cout << "(your answer): ";
+            cout << "your answer: ";
             cin >> repeat;
         }
 
     } while (repeat);
-    user->~PhoneBook();
+    user->~PhoneList();
 
 }
